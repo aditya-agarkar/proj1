@@ -21,8 +21,7 @@ colnames(data)<-c('subject',t(colnames),'label')
 ds1<-as.data.frame(rbind(apply(data,2,mean),apply(data,2,sd)))
 write.table(ds1,"dt1.txt",row.name=FALSE)
 
-library(data.table)
 DT <- data.table(data)
 ds2<-DT[,lapply(.SD,mean), by = subject]
-
+ds2<-arrange(ds2,subject)
 write.table(ds2,"dt2.txt",row.name=FALSE)
